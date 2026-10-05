@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0618">
+<title>Tarô | Agende sua consulta</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0618;--gold:#e6c36a;--pk:#9d6bff;--hot:#7a3cf0;--soft:#e4d4ff;--tx:#f1eaff;--mut:#b9a6dc;--line:#9d6bff55;--pad:clamp(18px,5vw,40px);color-scheme:dark;box-sizing:border-box}
+*,*:before,*:after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 clamp(17px,.35vw + 15.5px,20px)/1.6 'Cormorant Garamond',Georgia,serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 20% 0,#3a148088,transparent 55%),radial-gradient(ellipse at 90% 60%,#2a0e5a88,transparent 55%);z-index:0}
+.blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.3;z-index:0;animation:drift 18s ease-in-out infinite alternate;pointer-events:none}
+.b1{width:min(420px,70vw);aspect-ratio:1;background:var(--hot);top:-120px;left:-120px}.b2{width:min(380px,65vw);aspect-ratio:1;background:#6d28d9;bottom:-100px;right:-100px;animation-delay:-8s}
+@keyframes drift{to{transform:translate(90px,60px) scale(1.2)}}
+canvas#st{position:fixed;inset:0;z-index:1;pointer-events:none}
+.nav,main,footer{position:relative;z-index:2}
+img,svg{max-width:100%}
+h1,h2,h3{font-family:'Cinzel Decorative',Georgia,serif;margin:0;font-weight:700}
+.wrap{width:min(1100px,100% - 2*var(--pad));margin-inline:auto}
+.sec{padding:clamp(56px,9vw,104px) 0}
+h2{font-size:clamp(1.45rem,4.2vw,2.3rem);text-align:center;color:var(--soft);line-height:1.2;text-wrap:balance;text-shadow:0 0 25px var(--pk),0 0 60px #9d6bff88}
+.orn{display:flex;align-items:center;justify-content:center;gap:14px;margin:16px auto clamp(32px,5vw,52px);max-width:340px}
+.orn:before,.orn:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--pk))}.orn:after{transform:scaleX(-1)}
+.st{width:14px;height:14px;background:var(--gold);box-shadow:0 0 14px var(--gold);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:tw 2.4s infinite}
+@keyframes tw{50%{transform:scale(1.5) rotate(36deg);filter:brightness(1.6)}}
+/* botoes */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 clamp(26px,5vw,44px);border:1px solid var(--soft);border-radius:6px;background:linear-gradient(135deg,var(--hot),#4b1fa8);color:#fff;font:700 .85rem 'Cinzel Decorative',serif;letter-spacing:.14em;cursor:pointer;text-decoration:none;position:relative;overflow:hidden;box-shadow:0 0 25px #7a3cf0aa,inset 0 0 18px #ffffff33;transition:transform .3s;animation:pl 2.8s infinite;text-align:center}
+.btn:before{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,#fff8,transparent);transform:skewX(-20deg);animation:sw 3.4s infinite}
+@keyframes sw{60%,100%{left:140%}}@keyframes pl{50%{box-shadow:0 0 50px #7a3cf0,inset 0 0 18px #ffffff55}}
+.btn.sm{min-height:40px;padding:0 20px;font-size:.7rem;animation:none}
+.btn:disabled{opacity:.6;cursor:wait}
+/* nav */
+.nav{position:sticky;top:0;z-index:20;padding-top:env(safe-area-inset-top,0px);background:#0b0618d9;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #9d6bff33}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font:900 1.05rem 'Cinzel Decorative',serif;color:var(--soft);letter-spacing:.2em;text-decoration:none;text-shadow:0 0 18px var(--pk)}
+/* hero */
+.hero{position:relative;min-height:calc(100svh - 64px);display:grid;place-items:center;text-align:center;padding:clamp(40px,8vw,90px) 0;overflow:hidden}
+.hero .in{position:relative;z-index:1;max-width:760px;padding-inline:var(--pad)}
+.ring{position:absolute;top:50%;left:50%;width:min(100vw,640px);aspect-ratio:1;transform:translate(-50%,-50%);animation:spin 80s linear infinite;opacity:.4}
+.ring.r2{width:min(72vw,440px);animation-direction:reverse;animation-duration:50s;opacity:.3}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.fc{display:none;position:absolute;width:96px;height:160px;border:1px solid var(--pk);border-radius:10px;background:linear-gradient(160deg,#9d6bff22,#3a1a7a44);box-shadow:0 0 30px #9d6bff55;animation:fy 9s ease-in-out infinite}
+.fc:after{content:"";position:absolute;inset:8px;border:1px solid #9d6bff66;border-radius:6px}
+.f1{left:5%;top:26%;--r:-12deg}.f2{right:5%;bottom:22%;--r:10deg;animation-delay:-4s}
+@keyframes fy{0%,100%{transform:translateY(0) rotate(var(--r))}50%{transform:translateY(-22px) rotate(var(--r))}}
+@media(min-width:960px){.fc{display:block}}
+.moon{width:clamp(64px,12vw,90px);margin:0 auto 18px;filter:drop-shadow(0 0 14px var(--pk)) drop-shadow(0 0 34px var(--hot));animation:fl 6s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-10px)}}
+.tag{letter-spacing:.4em;font-size:.8rem;color:var(--gold);text-transform:uppercase;margin-bottom:6px;padding-left:.4em}
+.hero h1{font-size:clamp(2.1rem,8vw,4.4rem);line-height:1.1;margin:12px 0 20px;text-wrap:balance;background:linear-gradient(90deg,#fff,var(--pk),#fff,var(--pk));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 6s linear infinite;filter:drop-shadow(0 0 20px #9d6bffaa)}
+@keyframes sh{to{background-position:300% 0}}
+.hero p{max-width:34em;margin:0 auto 30px;color:var(--mut);font-size:clamp(1.05rem,2.4vw,1.3rem);text-wrap:pretty}
+/* sobre */
+.ab{display:grid;gap:clamp(28px,5vw,64px);grid-template-columns:1fr;align-items:center}
+@media(min-width:860px){.ab{grid-template-columns:1fr 1.15fr}}
+.quote{font-size:clamp(1.3rem,3.2vw,2rem);font-style:italic;line-height:1.35;color:var(--soft);border-left:2px solid var(--pk);padding-left:clamp(16px,3vw,26px);text-shadow:0 0 22px #9d6bff66}
+.rule{display:flex;gap:16px}.rule+.rule{margin-top:26px}
+.rule i{font:900 1.3rem 'Cinzel Decorative',serif;color:var(--gold);text-shadow:0 0 16px #e6c36a88;min-width:2.6rem;font-style:normal;line-height:1.4}
+.rule h3{font-size:.95rem;color:var(--soft);margin-bottom:4px;line-height:1.4}.rule p{margin:0;color:var(--mut)}
+/* pacotes */
+.pk{display:grid;gap:36px;grid-template-columns:1fr;max-width:440px;margin-inline:auto}
+@media(min-width:900px){.pk{grid-template-columns:repeat(3,1fr);max-width:none;gap:28px}}
+.pack{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:38px 22px 26px;cursor:pointer;border-radius:16px;background:linear-gradient(170deg,#24114a,#130a2b);border:1px solid var(--line);box-shadow:0 0 25px #9d6bff22;transition:box-shadow .3s,border-color .3s,transform .15s}
+.pack:before{content:"";position:absolute;inset:8px;border:1px solid #9d6bff44;border-radius:10px;pointer-events:none}
+.pack.sel{border-color:var(--soft);box-shadow:0 0 55px #7a3cf0,inset 0 0 40px #9d6bff33;animation:gl 2.5s infinite}
+@keyframes gl{50%{box-shadow:0 0 80px #7a3cf0,inset 0 0 50px #9d6bff55}}
+@media(hover:hover){.pack:hover{box-shadow:0 0 45px #9d6bff88;border-color:var(--pk)}.chip:hover{box-shadow:0 0 18px #9d6bff88}}
+.pack .rn{font:900 2.4rem/1 'Cinzel Decorative',serif;color:var(--gold);text-shadow:0 0 22px #e6c36a88}
+.pack h3{font-size:.95rem;color:var(--soft);margin:12px 0 0;line-height:1.4}
+.pack .p{font:900 2.3rem/1 'Cinzel Decorative',serif;color:#fff3c9;text-shadow:0 0 20px #e6c36a99;margin:16px 0 20px}
+.pack ul{list-style:none;padding:0;margin:auto 0 0;width:100%;color:var(--mut);font-size:1rem}.pack li{padding:8px 0;border-top:1px solid #9d6bff22}
+.top{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--hot);color:#fff;font:700 .65rem 'Cinzel Decorative',serif;letter-spacing:.1em;padding:6px 16px;border-radius:4px;white-space:nowrap;box-shadow:0 0 20px var(--hot)}
+/* formulario */
+.fm{max-width:760px;margin:clamp(40px,6vw,60px) auto 0;padding:clamp(20px,4.5vw,40px);border-radius:18px;background:#170c33cc;border:1px solid var(--line);box-shadow:0 0 50px #9d6bff22}
+.blk+.blk{margin-top:34px;padding-top:30px;border-top:1px solid #9d6bff33}
+.step{display:flex;align-items:center;gap:12px;font:700 .9rem 'Cinzel Decorative',serif;color:var(--gold);letter-spacing:.08em;margin:0 0 18px}
+.step b{display:grid;place-items:center;min-width:34px;height:34px;padding:0 6px;border:1px solid var(--gold);border-radius:50%;font-size:.75rem;box-shadow:0 0 14px #e6c36a55}
+label{display:block;margin:0 0 8px;color:var(--soft);font-weight:600;font-size:1rem}
+.fld+.fld,.g2+.fld,.fld+.g2,.chips+.fld,.chips+#qs,#qs+.fld{margin-top:20px}
+#qs label:not(:first-child){margin-top:18px}#qs:not(:empty){margin-top:20px}
+input,textarea,select{width:100%;min-height:50px;padding:12px 16px;background:#0b0618;border:1px solid var(--line);border-radius:10px;color:var(--tx);font:inherit;font-size:16px;outline:0;transition:border-color .3s,box-shadow .3s}
+input:focus,textarea:focus,select:focus{border-color:var(--pk);box-shadow:0 0 22px #9d6bff88}
+textarea{min-height:96px;resize:vertical}option{background:#130a2b}
+.g2{display:grid;gap:20px;grid-template-columns:1fr}@media(min-width:640px){.g2{grid-template-columns:1fr 1fr}}
+.chips{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+.chip{display:flex;align-items:center;justify-content:center;text-align:center;min-height:48px;padding:8px 16px;border:1px solid var(--line);border-radius:40px;cursor:pointer;transition:.25s;user-select:none;font-size:1rem}
+.chip.sel{background:linear-gradient(135deg,var(--hot),#4b1fa8);border-color:var(--soft);box-shadow:0 0 22px var(--hot);color:#fff}
+.sum{margin:24px 0 18px;padding:16px 18px;border-radius:10px;border:1px dashed var(--gold);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px 16px;background:#e6c36a0d}
+.sum b{font:900 1.6rem 'Cinzel Decorative',serif;color:#fff3c9;text-shadow:0 0 18px #e6c36a88}
+.go{width:100%}
+.note{text-align:center;color:var(--mut);font-size:.95rem;margin:14px 0 0}
+.px{margin-top:22px;padding:22px 18px;border:1px dashed var(--gold);border-radius:12px;background:#e6c36a0d;text-align:center}
+.px h3{color:var(--gold);font-size:1.15rem;margin-bottom:8px}
+#qr{display:inline-block;background:#fff;padding:12px;border-radius:12px;margin:12px 0}#qr img,#qr canvas{display:block;max-width:100%;height:auto}
+.px code{display:block;text-align:left;font:.78rem/1.4 ui-monospace,Consolas,monospace;color:#fff3c9;margin:4px 0 14px;word-break:break-all;max-height:7.5em;overflow:auto;padding:10px 12px;background:var(--bg);border-radius:8px;border:1px solid var(--line)}
+.px .chip{width:100%}
+/* faq */
+.faq{max-width:760px;margin-inline:auto}
+details{border-bottom:1px solid #9d6bff44;padding:18px 0}summary{cursor:pointer;color:var(--soft);font-size:1.15rem;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}summary:after{content:"+";color:var(--gold);font-size:1.6rem;line-height:1;transition:.3s}details[open] summary:after{transform:rotate(45deg)}
+details p{color:var(--mut);margin:10px 0 0}
+footer{text-align:center;padding:30px var(--pad) calc(50px + env(safe-area-inset-bottom,0px));color:var(--mut);font-size:.9rem}
+.rv{opacity:0;transform:translateY(40px);filter:blur(5px);transition:1s}.rv.in{opacity:1;transform:none;filter:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+</style></head><body>
+<div class="blob b1"></div><div class="blob b2"></div><canvas id="st"></canvas>
+<nav class="nav"><div class="wrap"><a class="brand" href="#">TARÔ</a><a class="btn sm" href="#agendar">AGENDAR</a></div></nav>
+<main>
+<header class="hero">
+<svg class="ring" id="r1" viewBox="-100 -100 200 200"></svg><svg class="ring r2" id="r2" viewBox="-100 -100 200 200"></svg>
+<div class="fc f1"></div><div class="fc f2"></div>
+<div class="in">
+<svg class="moon" viewBox="0 0 100 100"><defs><mask id="mk"><rect width="100" height="100" fill="#fff"/><circle cx="66" cy="38" r="34" fill="#000"/></mask></defs><circle cx="44" cy="54" r="40" fill="#e4d4ff" mask="url(#mk)"/></svg>
+<div class="tag">Consultas de Tarô</div>
+<h1>O que as cartas têm a te dizer</h1>
+<p>Leituras profundas de tarô, com tiragem completa e resposta detalhada, feitas com cuidado para você.</p>
+<a class="btn" href="#agendar">AGENDAR CONSULTA</a>
+</div></header>
+
+<section class="sec rv"><div class="wrap"><h2>Como eu trabalho</h2><div class="orn"><span class="st"></span></div>
+<div class="ab"><div class="quote">Aqui não tem leitura rápida e rasa. As cartas merecem perguntas à altura delas.</div>
+<div>
+<div class="rule"><i>I</i><div><h3>Só perguntas complexas</h3><p>Trabalho com situações, dilemas e caminhos que pedem profundidade. Perguntas simples de sim ou não não são o meu foco.</p></div></div>
+<div class="rule"><i>II</i><div><h3>Tiragem completa</h3><p>Cada pergunta ganha uma tiragem inteira, com a leitura carta por carta e uma resposta bem explicada.</p></div></div>
+<div class="rule"><i>III</i><div><h3>Sinceridade e acolhimento</h3><p>Digo o que as cartas mostram, com clareza e respeito, sem enrolação e sem promessa vazia.</p></div></div>
+</div></div></div></section>
+
+<section id="agendar" class="sec rv"><div class="wrap"><h2>Escolha sua consulta</h2><div class="orn"><span class="st"></span></div>
+<div class="pk" id="pk"></div>
+<div class="fm">
+<div class="blk"><h3 class="step"><b>I</b>Suas perguntas</h3>
+<label>Como prefere enviar?</label>
+<div class="chips" id="mode"><span class="chip sel" data-v="aqui">Escrever aqui no site</span><span class="chip" data-v="zap">Mandar pelo WhatsApp</span></div>
+<div id="qs"></div></div>
+
+<div class="blk"><h3 class="step"><b>II</b>Seus dados</h3>
+<div class="g2"><div><label for="nome">Nome completo</label><input id="nome" autocomplete="name" placeholder="Nome e sobrenome"></div>
+<div><label for="fmt">Como quer receber a resposta?</label><select id="fmt"><option>Texto detalhado</option><option>Áudio</option><option>Texto e áudio</option></select></div></div>
+<div class="fld"><label for="obs">Algo que eu deva saber? (opcional)</label><textarea id="obs" placeholder="Contexto, momento de vida, signo..."></textarea></div></div>
+
+<div class="blk"><h3 class="step"><b>III</b>Pagamento</h3>
+<div class="chips" id="paym"><span class="chip sel" data-v="site">Pagar agora pelo site (Pix)</span><span class="chip" data-v="zap">Combinar pelo WhatsApp</span></div>
+<div id="sitebox" class="fld"><label for="tel">Seu WhatsApp, para eu enviar suas respostas</label><input id="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 99999-9999"></div>
+<div class="sum"><span id="sumt"></span><b id="sump"></b></div>
+<button class="btn go" id="go">GERAR PIX PARA PAGAR</button>
+<p class="note" id="nt"></p>
+<div id="pixres" style="display:none"><div class="px" id="pixbox"><span>Pix no valor de <b id="pamt"></b></span><br><div id="qr"></div><code id="pixk"></code><span class="chip" id="copy">Copiar código Pix</span><p class="note" id="pst"></p></div>
+<div class="px" id="okbox" style="display:none"><h3>Pagamento confirmado</h3><p id="okt"></p><button class="btn" id="okwa" style="margin-top:10px"></button></div></div>
+</div>
+</div></div></section>
+
+<section class="sec rv"><div class="wrap"><h2>Dúvidas</h2><div class="orn"><span class="st"></span></div>
+<div class="faq">
+<details><summary>Que tipo de pergunta posso fazer?</summary><p>Perguntas abertas e com contexto, como "o que preciso entender sobre essa relação?" ou "qual caminho faz mais sentido para mim agora?".</p></details>
+<details><summary>Quanto tempo leva a resposta?</summary><p>Combino o prazo com você no WhatsApp, conforme o número de tiragens.</p></details>
+<details><summary>O tarot garante o futuro?</summary><p>O tarot é uma ferramenta de orientação e reflexão. Ele ilumina caminhos, mas as decisões continuam sendo suas.</p></details>
+</div></div></section>
+</main>
+<footer>Tarô é orientação espiritual e não substitui aconselhamento médico, jurídico ou financeiro.</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+var WHATS="5511964533002";
+var PK=[{n:1,r:"I",p:5,t:"1 Tiragem Completa",top:""},{n:3,r:"III",p:12,t:"3 Tiragens Completas",top:"MAIS PEDIDA"},{n:5,r:"V",p:20,t:"5 Tiragens Completas",top:"MELHOR VALOR"}];
+var sel=PK[1],mode="aqui",$=function(i){return document.getElementById(i)};
+// aneis zodiacais
+function ring(id,rad,n){var s="<circle r='"+rad+"' fill='none' stroke='#9d6bff' stroke-width='.4'/><circle r='"+(rad-8)+"' fill='none' stroke='#9d6bff' stroke-width='.2' stroke-dasharray='1 2'/>";
+for(var i=0;i<n;i++){var a=i*2*Math.PI/n,c=Math.cos(a),d=Math.sin(a);s+="<line x1='"+c*(rad-8)+"' y1='"+d*(rad-8)+"' x2='"+c*rad+"' y2='"+d*rad+"' stroke='#9d6bff' stroke-width='.4'/><circle cx='"+c*(rad+4)+"' cy='"+d*(rad+4)+"' r='1.1' fill='#e4d4ff'/>"}
+$(id).innerHTML=s}
+ring("r1",90,12);ring("r2",90,8);
+// pacotes
+$("pk").innerHTML=PK.map(function(k,i){return '<div class="pack'+(i==1?' sel':'')+'" data-i="'+i+'">'+(k.top?'<span class="top">'+k.top+'</span>':'')+'<div class="rn">'+k.r+'</div><h3>'+k.t+'</h3><div class="p">R$ '+k.p+'</div><ul><li>'+k.n+(k.n>1?' perguntas complexas':' pergunta complexa')+'</li><li>Resposta detalhada</li><li>Leitura carta por carta</li></ul></div>'}).join("");
+document.querySelectorAll(".pack").forEach(function(e){
+ e.onclick=function(){document.querySelectorAll(".pack").forEach(function(x){x.classList.remove("sel")});e.classList.add("sel");sel=PK[e.dataset.i];upd()};
+ e.onmousemove=function(ev){if(!matchMedia("(hover:hover)").matches)return;var b=e.getBoundingClientRect(),x=(ev.clientX-b.left)/b.width-.5,y=(ev.clientY-b.top)/b.height-.5;e.style.transform="rotateY("+x*14+"deg) rotateX("+-y*14+"deg) translateY(-6px)"};
+ e.onmouseleave=function(){e.style.transform=""}});
+document.querySelectorAll("#mode .chip").forEach(function(c){c.onclick=function(){document.querySelectorAll("#mode .chip").forEach(function(x){x.classList.remove("sel")});c.classList.add("sel");mode=c.dataset.v;upd()}});
+function upd(){$("sumt").textContent=sel.t+" com resposta detalhada";$("sump").textContent="R$ "+sel.p;$("pamt").textContent="R$ "+sel.p;
+ var h="";if(mode=="aqui"){for(var i=1;i<=sel.n;i++)h+='<label>Pergunta'+(sel.n>1?' '+i:'')+'</label><textarea class="q" placeholder="Escreva sua pergunta completa, com contexto..."></textarea>'}
+ else h='<p style="color:var(--mut);margin:22px 0 0">Tudo certo. Você me envia '+(sel.n>1?'as suas '+sel.n+' perguntas':'a sua pergunta')+' direto no WhatsApp depois de enviar o pedido.</p>';
+ $("qs").innerHTML=h}
+upd();
+var pay="site",poll=null,pid="";
+function setPay(){$("sitebox").style.display=pay=="site"?"block":"none";$("go").textContent=pay=="site"?"GERAR PIX PARA PAGAR":"ENVIAR PEDIDO PELO WHATSAPP";$("nt").textContent=pay=="site"?"Pagamento por Pix. A confirmação é automática.":"O pagamento será combinado comigo direto no WhatsApp."}
+document.querySelectorAll("#paym .chip").forEach(function(c){c.onclick=function(){document.querySelectorAll("#paym .chip").forEach(function(x){x.classList.remove("sel")});c.classList.add("sel");pay=c.dataset.v;setPay()}});
+setPay();
+function bad(el,msg){el.focus();el.placeholder=msg;el.style.borderColor="#ff6b8a";setTimeout(function(){el.style.borderColor=""},2500)}
+function wa(m){window.open("https://wa.me/"+WHATS+"?text="+encodeURIComponent(m),"_blank")}
+function resumo(nome,extra){var m="*Pedido de consulta de tarô*\n\nNome: "+nome+"\nConsulta: "+sel.t+" (R$ "+sel.p+")\nResposta em: "+$("fmt").value+"\n"+extra;
+ if(mode=="aqui")[].forEach.call(document.querySelectorAll(".q"),function(q,i){m+="\nPergunta "+(i+1)+": "+(q.value.trim()||"(envio depois)")});
+ else m+="\nVou enviar as perguntas por aqui no WhatsApp.";
+ if($("obs").value.trim())m+="\n\nObs: "+$("obs").value.trim();return m}
+$("go").onclick=async function(){var nome=$("nome").value.trim();
+ if(nome.split(/\s+/).length<2){$("nome").value="";bad($("nome"),"Preciso do seu nome completo");return}
+ if(pay=="zap"){wa(resumo(nome,"Pagamento: quero combinar pelo WhatsApp.\n"));return}
+ if($("tel").value.replace(/\D/g,"").length<10){bad($("tel"),"Informe seu WhatsApp com DDD");return}
+ $("go").disabled=true;$("go").textContent="GERANDO PIX...";
+ try{var r=await fetch("/api/pix",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({pacote:sel.n,nome:nome,tel:$("tel").value,modo:mode,perguntas:[].map.call(document.querySelectorAll(".q"),function(q){return q.value.trim()}),formato:$("fmt").value,obs:$("obs").value})});
+  var d=await r.json();if(!r.ok)throw new Error(d.erro||"Erro ao gerar o Pix");showPix(d,nome)}
+ catch(e){$("nt").textContent=e.message;$("go").disabled=false;setPay()}};
+function showPix(d,nome){pid=d.id;$("pixres").style.display="block";$("go").style.display="none";$("sitebox").style.display="none";
+ $("qr").innerHTML="";if(window.QRCode){new QRCode($("qr"),{text:d.code,width:210,height:210,correctLevel:QRCode.CorrectLevel.L})}else if(d.image){$("qr").innerHTML='<img alt="QR Code Pix" src="'+d.image+'">'};$("pixk").textContent=d.code;$("pst").textContent="Aguardando o pagamento...";
+ $("copy").onclick=function(){try{navigator.clipboard.writeText(d.code)}catch(e){}$("copy").textContent="Código copiado"};
+ $("pixres").scrollIntoView({behavior:"smooth",block:"center"});
+ poll=setInterval(async function(){try{var s=await(await fetch("/api/status/"+d.id)).json();
+  if(s.status=="pago"){clearInterval(poll);ok(nome)}
+  else if(["expired","failed","canceled"].indexOf(s.status)>-1){clearInterval(poll);$("pst").textContent="Este Pix não está mais válido. Recarregue a página para gerar outro."}}catch(e){}},4000)}
+function ok(nome){$("pixbox").style.display="none";$("okbox").style.display="block";
+ $("okt").textContent=mode=="zap"?"Recebi o seu pedido. Agora é só me enviar suas perguntas pelo WhatsApp.":"Recebi o seu pedido e as suas perguntas. Vou te responder no WhatsApp que você informou.";
+ $("okwa").textContent=mode=="zap"?"ENVIAR MINHAS PERGUNTAS":"FALAR COMIGO NO WHATSAPP";
+ $("okwa").onclick=function(){wa(resumo(nome,"Pagamento: Pix confirmado pelo site (pedido "+pid+").\n"))}}
+// estrelas + brilho do cursor
+var cv=$("st"),x=cv.getContext("2d"),S=[],P=[],SS=[];
+function rs(){cv.width=innerWidth;cv.height=innerHeight;S=[];for(var i=0,n=Math.min(120,Math.floor(innerWidth*innerHeight/9000));i<n;i++)S.push({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.5+.3,s:Math.random()*.02+.005,o:Math.random()*6,c:Math.random()>.5?"#e4d4ff":"#9d6bff"})}
+addEventListener("resize",rs);rs();
+(function f(t){x.clearRect(0,0,cv.width,cv.height);
+ S.forEach(function(s){x.globalAlpha=.3+.7*Math.abs(Math.sin(t*s.s*.1+s.o));x.fillStyle=s.c;x.shadowColor=s.c;x.shadowBlur=8;x.beginPath();x.arc(s.x,s.y,s.r,0,7);x.fill();s.y-=s.s*3;if(s.y<0)s.y=cv.height});
+ if(Math.random()<.006)SS.push({x:Math.random()*cv.width,y:0,l:1});
+ SS.forEach(function(s){x.globalAlpha=s.l;x.strokeStyle="#e4d4ff";x.lineWidth=2;x.beginPath();x.moveTo(s.x,s.y);x.lineTo(s.x-80,s.y-40);x.stroke();s.x+=10;s.y+=5;s.l-=.02});SS=SS.filter(function(s){return s.l>0});
+ requestAnimationFrame(f)})(0);
+var io=new IntersectionObserver(function(e){e.forEach(function(a){if(a.isIntersecting)a.target.classList.add("in")})},{threshold:.1});
+document.querySelectorAll(".rv").forEach(function(e){io.observe(e)});
+</script></body></html>
