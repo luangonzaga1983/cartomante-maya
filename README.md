@@ -1,6 +1,6 @@
-# Tarô | Agende sua consulta
+# Oráculo | Consultas de Tarot e Baralho Cigano
 
-Site de agendamento de consultas de tarô com pagamento via Pix (SigiloPay).
+Site de agendamento de consultas espirituais (Tarot e Baralho Cigano) com pagamento via Pix (SigiloPay).
 
 ## Rodar localmente
 
@@ -20,3 +20,13 @@ npm start              # http://localhost:3000
 
 O webhook da SigiloPay é configurado automaticamente com a URL do projeto na Vercel.
 Painel de pedidos: `https://SEU-SITE.vercel.app/admin?key=SUA_ADMIN_KEY`
+
+## Preços (ficam em `app.js`, constante `BARALHOS`)
+
+| Consulta | Tarot | Baralho Cigano |
+|---|---|---|
+| 1 consulta | R$ 5 | R$ 9 |
+| 3 consultas | R$ 12 | R$ 22 |
+| 5 consultas | R$ 20 | R$ 36 |
+
+Para mudar valores, edite `BARALHOS` em `app.js` **e** `DECKS` no script de `public/index.html` (o servidor é quem cobra de verdade; o site só exibe).

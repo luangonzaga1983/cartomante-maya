@@ -16,11 +16,12 @@ const BASE_URL = (
 const API = 'https://app.sigilopay.com.br/api/v1/gateway/pix/receive';
 
 // Os preços ficam SÓ aqui no servidor: o cliente nunca decide o valor.
-const PACOTES = {
-  1: { nome: '1 Tiragem Completa', preco: 5 },
-  3: { nome: '3 Tiragens Completas', preco: 12 },
-  5: { nome: '5 Tiragens Completas', preco: 20 },
+// O baralho cigano é mais caro: leitura mais direta e assertiva.
+const BARALHOS = {
+  tarot: { nome: 'Tarot', precos: { 1: 5, 3: 12, 5: 20 } },
+  cigano: { nome: 'Baralho Cigano', precos: { 1: 9, 3: 22, 5: 36 } },
 };
+const QTD = { 1: '1 Consulta', 3: '3 Consultas', 5: '5 Consultas' };
 
 // Dados do cliente enviados à SigiloPay: sempre fixos (vêm das variáveis de ambiente).
 const CLIENTE_FIXO = { email: CLIENT_EMAIL, phone: CLIENT_PHONE, document: CLIENT_DOCUMENT };
@@ -54,7 +55,9 @@ app.post('/api/pix', limite, async (req, res) => {
     }
 
     const b = req.body || {};
-    const p = PACOTES[b.pacote];
+    const bar = BARALHOS[b.baralho];
+    const preco = bar && bar.precos[b.pacote];
+    const p = preco ? { nome: bar.nome + ' - ' + QTD[b.pacote], preco } : null;
     const nome = txt(b.nome, 120);
     const tel = txt(b.tel, 25).replace(/[^\d+()\-\s]/g, '');
     if (!p) return res.status(400).json({ erro: 'Consulta inválida.' });
@@ -66,7 +69,7 @@ app.post('/api/pix', limite, async (req, res) => {
       identifier: id,
       amount: p.preco,
       client: { name: nome, ...CLIENTE_FIXO },
-      products: [{ id: 'tiragem-' + b.pacote, name: p.nome, quantity: 1, price: p.preco }],
+      products: [{ id: b.baralho + '-' + b.pacote, name: p.nome, quantity: 1, price: p.preco }],
       ...(BASE_URL ? { callbackUrl: BASE_URL + '/api/webhook' } : {}),
     };
 
@@ -84,7 +87,7 @@ app.post('/api/pix', limite, async (req, res) => {
     await store.salvar({
       id, criadoEm: new Date().toISOString(), status: 'pendente',
       transactionId: d.transactionId, webhookToken: d.webhookToken || null,
-      pacote: p.nome, valor: p.preco, nome, tel, modo: b.modo === 'zap' ? 'zap' : 'aqui',
+      baralho: bar.nome, pacote: p.nome, valor: p.preco, nome, tel, modo: b.modo === 'zap' ? 'zap' : 'aqui',
       perguntas: (Array.isArray(b.perguntas) ? b.perguntas : []).slice(0, 5).map((q) => txt(q, 1500)),
       formato: txt(b.formato, 40), obs: txt(b.obs, 1500),
     });
